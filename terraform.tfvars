@@ -1,0 +1,5 @@
+access_key = "AKIA3VGA2ISOS4JREG22"
+secret_key = "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"
+awsRegion = "us-east-1"
+instanceType = "t2.micro"
+instanceName = "idp-test"

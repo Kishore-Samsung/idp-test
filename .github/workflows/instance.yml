@@ -1,0 +1,67 @@
+# Define the name of the GitHub Action workflow
+name: Create an ec2 instance
+# This workflow is manually triggered using the GitHub Actions UI
+on:
+  workflow_dispatch:
+    # Define inputs that are required for the manual trigger
+# Jobs to be executed in this workflow
+jobs:
+  # Job for applying the ec2 instance
+  apply_ec2:
+    # Use the latest Ubuntu runner
+    runs-on: ubuntu-latest
+    
+    # Execute this step only if the action input is "apply"
+    # Define the steps for this job
+    steps:
+    
+    # checkout the code from the repository
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+      
+    # Initialize Terraform 
+    - name: Terraform Init
+      run: terraform init
+      working-directory: .  # Where should this command be run?
+      
+    # Format Terraform code
+    - name: Terraform Format
+      run: terraform fmt
+      working-directory: .
+      
+    # Validate the Terraform code 
+    - name: Terraform Validate
+      run: terraform validate
+      working-directory: .
+      
+    # Apply the Terraform plan
+    - name: terraform apply
+      run: terraform apply -auto-approve
+      working-directory: .
+
+  # Destroying the  ec2 instance
+  destroy_instance:
+    runs-on: ubuntu-latest
+    
+    # Execute this job only if the action input is "destroy"
+    if: false
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+        
+    - name: Terraform Init
+      run: terraform init
+      working-directory: .
+      
+    - name: Terraform FMT
+      run: terraform fmt
+      working-directory: .
+      
+      
+    # Destroy all resources 
+    - name: terraform apply
+      run: terraform destroy -auto-approve
+      working-directory: .

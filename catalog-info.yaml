@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "idp-test"
+spec:
+  type: service
+  owner: cp-joshi 
+  lifecycle: experimental
